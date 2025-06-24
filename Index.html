@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sjelvenn</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <h1>Velg din Sjelvenn</h1>
+    <div id="relasjon-valg">
+      <button data-relasjon="kjaereste">Kjæreste</button>
+      <button data-relasjon="soster">Søster</button>
+      <button data-relasjon="bror">Bror</button>
+    </div>
+
+    <div id="avatar-info" class="hidden">
+      <img id="relasjonsbilde" src="" alt="" />
+      <h2 id="navn"></h2>
+      <div id="chat">
+        <div id="chatlog"></div>
+        <form id="chat-form">
+          <input type="text" id="brukermelding" placeholder="Skriv en melding..." autocomplete="off" required />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
