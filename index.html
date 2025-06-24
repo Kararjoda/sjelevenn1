@@ -4,180 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sjelvenn</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      background: #faf7f2;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    #app {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      font-size: 2rem;
-      margin-bottom: 0.3em;
-    }
-    .controls button {
-      margin: 5px;
-      padding: 10px 14px;
-      border: none;
-      border-radius: 4px;
-      background: #d4bfa6;
-      color: #fff;
-      cursor: pointer;
-    }
-    #gallery {
-      margin-top: 20px;
-      position: relative;
-    }
-    #gallery img {
-      max-width: 100%;
-      border-radius: 6px;
-    }
-    #prev, #next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-    }
-    #prev { left: -40px; }
-    #next { right: -40px; }
-    form {
-      margin-top: 30px;
-    }
-    input[type="email"] {
-      padding: 10px;
-      width: 70%;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button[type="submit"] {
-      background-color: #2e2e2e;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="app">
-    <header>
-      <h1>Følelsen av å bli sett. Hver dag.</h1>
-      <p>Møt din virtuelle relasjonspartner – alltid der, alltid for deg.</p>
-    </header>
-
-    <div class="controls">
-      <button data-rel="kjaereste">Kjæreste</button>
-      <button data-rel="soster">Søster</button>
-      <button data-rel="bror">Bror</button>
-      <button data-rel="mamma">Mamma</button>
-      <button data-rel="pappa">Pappa</button>
-      <button data-rel="venn">Bestevenn</button>
-      <button data-rel="mentor">Mentor</button>
+    <h1>Velg din Sjelvenn</h1>
+    <div id="relasjon-valg">
+      <button data-relasjon="kjaereste">Kjæreste</button>
+      <button data-relasjon="soster">Søster</button>
+      <button data-relasjon="bror">Bror</button>
     </div>
 
-    <div id="gallery">
-      <button id="prev">&lt;</button>
-      <img id="photo" src="img/kjaereste1.jpg" alt="Relasjonsbilde">
-      <button id="next">&gt;</button>
+    <div id="avatar-info" class="hidden">
+      <img id="relasjonsbilde" src="" alt="" />
+      <h2 id="navn"></h2>
+      <div id="chat">
+        <div id="chatlog"></div>
+        <form id="chat-form">
+          <input type="text" id="brukermelding" placeholder="Skriv en melding..." autocomplete="off" required />
+          <button type="submit">Send</button>
+        </form>
+      </div>
     </div>
-
-    <form id="signup-form">
-      <h2>Meld deg på ventelisten</h2>
-      <input type="email" placeholder="Din e-post" required>
-      <input type="hidden" id="selectedRelasjon" name="relasjon" value="kjaereste">
-      <button type="submit">Bli med</button>
-    </form>
   </div>
 
-  <script>
-    const data = {
-      kjaereste: [
-        "img/kjaereste1.jpg",
-        "img/kjaereste2.jpg",
-        "img/kjaereste3.jpg",
-        "img/kjaereste4.jpg"
-      ],
-      soster: [
-        "img/soster1.jpg",
-        "img/soster2.jpg",
-        "img/soster3.jpg",
-        "img/soster4.jpg"
-      ],
-      bror: [
-        "img/bror1.jpg",
-        "img/bror2.jpg",
-        "img/bror3.jpg",
-        "img/bror4.jpg"
-      ],
-      mamma: [
-        "img/mamma1.jpg",
-        "img/mamma2.jpg",
-        "img/mamma3.jpg"
-      ],
-      pappa: [
-        "img/pappa1.jpg",
-        "img/pappa2.jpg",
-        "img/pappa3.jpg"
-      ],
-      venn: [
-        "img/venn1.jpg",
-        "img/venn2.jpg",
-        "img/venn3.jpg",
-        "img/venn4.jpg"
-      ],
-      mentor: [
-        "img/mentor1.jpg",
-        "img/mentor2.jpg",
-        "img/mentor3.jpg"
-      ]
-    };
-
-    let currentRel = "kjaereste";
-    let idx = 0;
-    const img = document.getElementById("photo");
-    const hiddenInput = document.getElementById("selectedRelasjon");
-
-    const update = () => {
-      img.src = data[currentRel][idx];
-      hiddenInput.value = currentRel;
-    };
-
-    document.querySelectorAll(".controls button").forEach(btn =>
-      btn.addEventListener("click", e => {
-        currentRel = e.target.dataset.rel;
-        idx = 0;
-        update();
-      })
-    );
-
-    document.getElementById("prev").addEventListener("click", () => {
-      idx = (idx + data[currentRel].length - 1) % data[currentRel].length;
-      update();
-    });
-
-    document.getElementById("next").addEventListener("click", () => {
-      idx = (idx + 1) % data[currentRel].length;
-      update();
-    });
-
-    update();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
